@@ -28,21 +28,21 @@ class RSI_Tracker_GUI:
 
         self.root.title("RSI Tracker by EinfacheEnte")
         
-        # Create frames for consoles
+
         self.console_frame1 = Frame(root, bg="black")
         self.console_frame1.pack(side=LEFT, fill=BOTH, expand=True, padx=5, pady=5)
         
         self.console_frame2 = Frame(root, bg="black")
         self.console_frame2.pack(side=RIGHT, fill=BOTH, expand=True, padx=5, pady=5)
 
-        # Add scrolled text widgets for output
+
         self.rsi_console = ScrolledText(self.console_frame1, bg="gray11", fg="white", font=("Courier", 10))
         self.rsi_console.pack(fill=BOTH, expand=True, padx=5, pady=5)
 
         self.progress_console = ScrolledText(self.console_frame2, bg="gray11", fg="white", font=("Courier", 10))
         self.progress_console.pack(fill=BOTH, expand=True, padx=5, pady=5)
 
-        # Start the RSI tracker in a separate thread
+
         threading.Thread(target=self.loop, daemon=True).start()
 
     def send_notification(self, title, message):
@@ -52,7 +52,7 @@ class RSI_Tracker_GUI:
                 title=title,
                 message=message,
                 app_name="RSI Tracker",
-                timeout=5  # Notification duration in seconds
+                timeout=5  
             )
         except Exception as e:
             self.log_to_progress_console(f"Error sending notification: {str(e)}", "red")
@@ -61,14 +61,14 @@ class RSI_Tracker_GUI:
         """Log messages to the RSI console with a specific color."""
         self.rsi_console.tag_configure(color, foreground=color)
         self.rsi_console.insert(END, message, color)
-        self.rsi_console.insert(END, "\n")  # Add a newline for better formatting
+        self.rsi_console.insert(END, "\n")  
         self.rsi_console.see(END)
 
     def log_to_progress_console(self, message, color="white"):
         """Log messages to the progress console with a specific color."""
         self.progress_console.tag_configure(color, foreground=color)
         self.progress_console.insert(END, message, color)
-        self.progress_console.insert(END, "\n")  # Add a newline for better formatting
+        self.progress_console.insert(END, "\n") 
         self.progress_console.see(END)
 
     def track_rsi(self, symbol, interval, color):
